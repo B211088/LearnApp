@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "create-app-react": "^1.0.6",
+    "vite": "^5.2.11"
+  }
+}

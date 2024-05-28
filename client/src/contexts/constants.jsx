@@ -1,6 +1,6 @@
 export const apiUrl =
   process.env.NODE_ENV !== "production"
-    ? "http://localhost:5000/api"
+    ? "https://polar-fortress-55465-1f2d8f99b0c5.herokuapp.com/api"
     : "somedeployedUrl";
 
 export const LOCAL_STORAGE_TOKEN_NAME = "learnit-mern";

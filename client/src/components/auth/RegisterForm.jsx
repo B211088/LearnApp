@@ -61,7 +61,7 @@ const RegisterForm = () => {
           <Form.Control
             className="h-[40px] mt-[20px] text-[0.9rem] outline-none rounded-[5px]"
             type="text"
-            placeholder="Nhập tài khoảng"
+            placeholder="Nhập tài khoản"
             name="username"
             required
             value={username}

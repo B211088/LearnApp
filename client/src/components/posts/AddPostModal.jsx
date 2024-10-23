@@ -3,9 +3,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useContext, useState } from "react";
 import { PostContext } from "../../contexts/PostContext";
+
 const AddPostModal = () => {
-  const { showAddPostModal, setShowAddPostModal, addPost, setShowToast } =
-    useContext(PostContext);
+  const { showAddPostModal, setShowAddPostModal, addPost, setShowToast } = useContext(PostContext);
 
   const [newPost, setNewPost] = useState({
     title: "",
@@ -16,15 +16,25 @@ const AddPostModal = () => {
 
   const { title, description, url } = newPost;
 
-  const onChangeNewPostForm = (e) =>
-    setNewPost({ ...newPost, [e.target.name]: e.target.value });
+  const onChangeNewPostForm = (e) => setNewPost({ ...newPost, [e.target.name]: e.target.value });
 
   const closeDialog = () => {
     resetAddPostData();
   };
 
-  const onSubmit = async (envent) => {
-    envent.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    
+    // Kiểm tra xem các trường cần thiết có được điền đầy đủ không
+    if (!title || !description || !url) {
+      setShowToast({
+        show: true,
+        message: "Vui lòng điền đầy đủ thông tin.",
+        type: "danger",
+      });
+      return;
+    }
+
     const { success, message } = await addPost(newPost);
     resetAddPostData();
     setShowToast({
@@ -82,17 +92,12 @@ const AddPostModal = () => {
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <div className="">
-            {" "}
-            <Button variant="primary" type="submit">
-              Thêm
-            </Button>
-          </div>
-          <div className="">
-            <Button onClick={closeDialog} variant="secondary">
-              Đóng
-            </Button>
-          </div>
+          <Button variant="primary" type="submit">
+            Thêm
+          </Button>
+          <Button onClick={closeDialog} variant="secondary">
+            Đóng
+          </Button>
         </Modal.Footer>
       </Form>
     </Modal>

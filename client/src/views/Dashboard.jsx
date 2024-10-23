@@ -1,6 +1,6 @@
 import { PostContext } from "../contexts/PostContext";
 import { AuthContext } from "../contexts/AuthContext";
-import { useContext, useEffect, useState } from "react"; // Thêm useState
+import { useContext, useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -26,15 +26,14 @@ const Dashboard = () => {
     setShowToast,
   } = useContext(PostContext);
 
-  const [searchTerm, setSearchTerm] = useState(""); // Thêm state cho tìm kiếm
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // Bắt đầu lấy dữ liệu posts khi component được mount
   useEffect(() => {
     getPosts();
   }, [getPosts]);
 
-  const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredPosts = posts.filter((post) => 
+    post && post.title && post.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   let body = null;
@@ -47,30 +46,25 @@ const Dashboard = () => {
     );
   } else if (posts.length === 0) {
     body = (
-      <>
-        <Card className="text-center mx-5 my-5">
-          <Card.Header as="h1">Hi {username}</Card.Header>
-          <Card.Body>
-            <Card.Title>Welcome to Learn App</Card.Title>
-            <Card.Text>
-              Bạn hiện đang không có bài học nào, hãy tạo bài học mới
-            </Card.Text>
-            <div>
-              <Button
-                variant="primary"
-                onClick={() => setShowAddPostModal(true)}
-              >
-                Thêm bài học đầu tiên
-              </Button>
-            </div>
-          </Card.Body>
-        </Card>
-      </>
+      <Card className="text-center mx-5 my-5">
+        <Card.Header as="h1">Hi {username}</Card.Header>
+        <Card.Body>
+          <Card.Title>Welcome to Learn App</Card.Title>
+          <Card.Text>
+            Bạn hiện đang không có bài học nào, hãy tạo bài học mới
+          </Card.Text>
+          <Button
+            variant="primary"
+            onClick={() => setShowAddPostModal(true)}
+          >
+            Thêm bài học đầu tiên
+          </Button>
+        </Card.Body>
+      </Card>
     );
   } else {
     body = (
       <>
-        {/* Thanh tìm kiếm */}
         <div className="w-full px-[10px] mt-[30px]">
           <div className="search-container flex items-center py-[10px] px-[10px] border-[1px] border-gray-400 rounded-[5px]">
             <input

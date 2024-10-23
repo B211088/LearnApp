@@ -10,14 +10,13 @@ const LoginForm = () => {
   const { loginUser } = useContext(AuthContext);
   // Router
 
-
   // Local state
   const [loginForm, setLoginForm] = useState({
     username: "",
     password: "",
   });
 
-  const [alert, setAlert] = useState(null)
+  const [alert, setAlert] = useState(null);
 
   const { username, password } = loginForm;
 
@@ -28,11 +27,11 @@ const LoginForm = () => {
     event.preventDefault();
     try {
       const loginData = await loginUser(loginForm);
-      if (!loginData.success){
-        setAlert({type: 'danger', message: loginData.message})
+      if (!loginData.success) {
+        setAlert({ type: "danger", message: loginData.message });
         setTimeout(() => {
-          setAlert(null)
-        }, 3000)
+          setAlert(null);
+        }, 3000);
       }
     } catch (error) {
       console.log(error);
@@ -41,40 +40,49 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form className="my-4" onSubmit={login}>
-      <AlertMessage info={alert}/>
+      <Form
+        className="my-4 bg-white sm:w-[26%] sm:min-w-[300px] sm:max-w-[360px] w-full min-w-[290px] px-[20px] py-[20px] rounded-[5px]"
+        onSubmit={login}
+      >
+        <h1 className=" text-black font-bold text-[1.6rem] py-[10px] ">
+          Đăng nhập
+        </h1>
+        <AlertMessage info={alert} />
         <Form.Group>
           <Form.Control
+            className="h-[40px] mt-[30px] text-[0.9rem] outline-none rounded-[5px]"
             type="text"
-            placeholder="Username"
+            placeholder="Tên tài khoản"
             name="username"
             required
             value={username}
             onChange={onChangeLoginForm}
           />
         </Form.Group>
-        <Form.Group className="mt-3">
+        <Form.Group className="mt-[20px]">
           <Form.Control
+            className="h-[40px] text-[0.9rem] outline-none rounded-[5px]"
             type="password"
-            placeholder="Password"
+            placeholder="Mật khẩu"
             name="password"
             required
             value={password}
             onChange={onChangeLoginForm}
           />
         </Form.Group>
-        <Button className="mt-3" variant="success" type="submit">
+        <Button className="mt-[50px] w-full" variant="success" type="submit">
           Login
         </Button>
+
+        <p className="mt-[60px] text-black text-[0.8rem]">
+          Bạn chưa có tài khoản?
+          <Link to="/register">
+            <Button variant="info" size="sm" className="ml-2 text-black">
+              Đăng ký
+            </Button>
+          </Link>
+        </p>
       </Form>
-      <p className="mt-3">
-        Dont have an account?
-        <Link to="/register">
-          <Button variant="info" size="sm" className="ml-2">
-            Register
-          </Button>
-        </Link>
-      </p>
     </>
   );
 };

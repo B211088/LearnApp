@@ -81,7 +81,7 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
-//logout
+  //logout
   const logoutUser = () => {
     localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
     setAuthToken(null);
@@ -89,7 +89,7 @@ const AuthContextProvider = ({ children }) => {
       type: "SET_AUTH",
       payload: { isAuthenticated: false, user: null },
     });
-  }
+  };
 
   // Context data
   const authContextData = {

@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useContext, useState } from "react";
 import { PostContext } from "../../contexts/PostContext";
 const AddPostModal = () => {
-  const { showAddPostModal, setShowAddPostModal, addPost,  setShowToast } =
+  const { showAddPostModal, setShowAddPostModal, addPost, setShowToast } =
     useContext(PostContext);
 
   const [newPost, setNewPost] = useState({
@@ -30,8 +30,8 @@ const AddPostModal = () => {
     setShowToast({
       show: true,
       message,
-      type: success? "success" : "danger",
-    })
+      type: success ? "success" : "danger",
+    });
   };
 
   const resetAddPostData = () => {
@@ -49,7 +49,7 @@ const AddPostModal = () => {
           <Form.Group>
             <Form.Control
               type="text"
-              placeholder="Title"
+              placeholder="Tiêu đề"
               name="title"
               required
               aria-describedby="title-help"
@@ -57,13 +57,13 @@ const AddPostModal = () => {
               onChange={onChangeNewPostForm}
             />
             <Form.Text className="pl-1 text-red-600" id="title-help" muted>
-              Required
+              *bắt buộc
             </Form.Text>
           </Form.Group>
           <Form.Group className="mt-3">
             <Form.Control
               as="textarea"
-              placeholder="Description"
+              placeholder="Mô tả"
               name="description"
               required
               value={description}
@@ -73,7 +73,7 @@ const AddPostModal = () => {
           <Form.Group className="mt-3">
             <Form.Control
               type="text"
-              placeholder="Youte Tutorial URL"
+              placeholder="Đường link đến khóa học"
               name="url"
               required
               value={url}
@@ -85,12 +85,12 @@ const AddPostModal = () => {
           <div className="">
             {" "}
             <Button variant="primary" type="submit">
-              Submit
+              Thêm
             </Button>
           </div>
           <div className="">
             <Button onClick={closeDialog} variant="secondary">
-              Close
+              Đóng
             </Button>
           </div>
         </Modal.Footer>

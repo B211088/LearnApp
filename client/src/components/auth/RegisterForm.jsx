@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import AlertMessage from "../Layout/AlertMessage";
@@ -38,9 +38,8 @@ const RegisterForm = () => {
     try {
       const registerData = await registerUser(registerForm);
       if (registerData.success) {
-        navigate("/login")
-      }
-      else{
+        navigate("/login");
+      } else {
         setAlert({ type: "danger", message: registerData.message });
         setTimeout(() => {
           setAlert(null);
@@ -52,12 +51,17 @@ const RegisterForm = () => {
   };
   return (
     <>
-      <Form onSubmit={register}>
-        <AlertMessage info={alert} />
+      <Form
+        onSubmit={register}
+        className="my-4 bg-white sm:w-[26%] sm:min-w-[300px] sm:max-w-[360px] w-full min-w-[290px] px-[20px] py-[20px] rounded-[5px]"
+      >
+        <AlertMessage className="mt-[20px]" info={alert} />
+        <h1 className=" text-black font-bold text-[1.6rem] ">Đăng ký</h1>
         <Form.Group>
           <Form.Control
+            className="h-[40px] mt-[20px] text-[0.9rem] outline-none rounded-[5px]"
             type="text"
-            placeholder="Username"
+            placeholder="Nhập tài khoảng"
             name="username"
             required
             value={username}
@@ -66,36 +70,39 @@ const RegisterForm = () => {
         </Form.Group>
         <Form.Group className="mt-3">
           <Form.Control
+            className="h-[40px] mt-[20px] text-[0.9rem] outline-none rounded-[5px]"
             type="password"
-            placeholder="Password"
+            placeholder="Nhập Mật khẩu"
             name="password"
             required
             value={password}
             onChange={onChangeRegisterForm}
           />
         </Form.Group>
-        <Form.Group className="mt-3">
+        <Form.Group className="mt-[10px]">
           <Form.Control
+            className="h-[40px] mt-[20px] text-[0.9rem] outline-none rounded-[5px]"
             type="password"
-            placeholder="Comfirm Password"
+            placeholder="Nhập lại mật khẩu"
             name="comfirmPassword"
             required
             value={comfirmPassword}
             onChange={onChangeRegisterForm}
           />
         </Form.Group>
-        <Button className="mt-3" variant="success" type="submit">
+        <Button className="mt-[30px] w-full" variant="success" type="submit">
           Register
         </Button>
+
+        <p className="mt-[40px] text-black text-[0.8rem]">
+          Bạn đã có tài khoản?
+          <Link to="/login ">
+            <Button variant="info" size="sm" className="ml-2">
+              Đăng nhập
+            </Button>
+          </Link>
+        </p>
       </Form>
-      <p className="mt-3">
-        Elready have an account?
-        <Link to="/login ">
-          <Button variant="info" size="sm" className="ml-2">
-            login
-          </Button>
-        </Link>
-      </p>
     </>
   );
 };

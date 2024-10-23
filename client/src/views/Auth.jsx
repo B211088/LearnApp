@@ -37,9 +37,11 @@ const Auth = ({ authRoute }) => {
   return (
     <div className="landing">
       <div className="dark-overlay">
-        <div className="landing-inner">
-          <h1 className="text-5xl mb-2">LearnTt</h1>
-          <h4 className="text-2xl mb-3">Keep track of what you are learning</h4>
+        <div className="landing-inner flex sm:flex-row flex-col px-[10px] sm:gap-[100px] gap-[10px]">
+          <div className="sm:h-[300px] h-[100px]">
+            <h1 className="text-5xl mb-2 font-bold">LEARN APP</h1>
+            <h4 className="text-2xl mb-3">Quản lý các khóa học của bạn</h4>
+          </div>
           {body}
         </div>
       </div>

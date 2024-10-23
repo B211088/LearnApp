@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require("../models/User");
+const User = require("../models/user");
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 const verifyToken = require("../middleware/auth");

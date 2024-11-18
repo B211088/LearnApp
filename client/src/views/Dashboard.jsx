@@ -66,7 +66,7 @@ const Dashboard = () => {
     body = (
       <>
         <div className="w-full px-[10px] mt-[30px]">
-          <div className="search-container flex items-center py-[10px] px-[10px] border-[1px] border-gray-400 rounded-[5px]">
+          <div className="search-container flex items-center py-[10px] px-[10px] border-[1px] border-gray-400 rounded-[5px] hidden">
             <input
               type="text"
               placeholder="Tìm kiếm bài học..."

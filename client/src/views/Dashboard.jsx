@@ -1,6 +1,6 @@
 import { PostContext } from "../contexts/PostContext";
 import { AuthContext } from "../contexts/AuthContext";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -10,6 +10,7 @@ import Card from "react-bootstrap/Card";
 import SinglePost from "../components/posts/SinglePost";
 import AddPostModal from "../components/posts/AddPostModal";
 import UpdatePostModal from "../components/posts/UpdatePostModal";
+import ProgressBar from "react-bootstrap/ProgressBar";
 
 const Dashboard = () => {
   const {
@@ -25,6 +26,18 @@ const Dashboard = () => {
     showToast: { show, message, type },
     setShowToast,
   } = useContext(PostContext);
+
+  
+  const completedPosts = useMemo(
+    () =>
+      (posts || []).filter((post) => post && post.status === "LEARNED").length,
+    [posts]
+  );
+
+  const progress = useMemo(
+    () => (completedPosts / posts.length) * 100,
+    [completedPosts, posts]
+  );
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -66,14 +79,15 @@ const Dashboard = () => {
     body = (
       <>
         <div className="w-full px-[10px] mt-[30px]">
-          <div className="search-container flex items-center py-[10px] px-[10px] border-[1px] border-gray-400 rounded-[5px] hidden">
-            <input
-              type="text"
-              placeholder="Tìm kiếm bài học..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="form-control w-[30%] border-gray-300"
-            />
+          <div className="search-container flex items-center py-[10px] px-[10px] border-[1px] border-gray-400 rounded-[5px] ">
+            <div className="h-[38px] flex items-center gap-[5px] ">
+                <h6 className=" text-gray-700 ">Tiến độ: </h6>
+                <ProgressBar
+                  className="w-[140px]"
+                  now={progress}
+                  label={`${Math.round(progress)}%`}
+                />
+              </div>
           </div>
         </div>
         <Row className="w-full row-cols-1 row-cols-md-3 g-4 mx-auto mt-3 bg-white border-none flex justify-start flex-wrap">
